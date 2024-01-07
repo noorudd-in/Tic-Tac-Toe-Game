@@ -1,0 +1,29 @@
+body {
+  color: white;
+}
+
+h1 {
+  text-align: center;
+}
+
+.board-2p {
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+}
+
+.board-3p {
+  grid-template-columns: 75px 75px 75px 75px;
+  grid-template-rows: 75px 75px 75px 75px;
+}
+
+.tile {
+  color: currentColor;
+}
+
+.right-border {
+  border-right: 0.2em solid #0074a6;
+}
+
+.bottom-border {
+  border-bottom: 0.2em solid #0074a6;
+}
