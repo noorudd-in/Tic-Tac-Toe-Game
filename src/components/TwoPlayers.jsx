@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Tile from "./Tile";
-import ShowNames from "./ShowNames";
 
 const TwoPlayers = ({
   winnerIndex,
@@ -10,6 +9,7 @@ const TwoPlayers = ({
   playerOne,
   playerTwo,
   currentPlayer,
+  winner,
 }) => {
   return (
     <>
@@ -21,6 +21,7 @@ const TwoPlayers = ({
       </div>
       <div className="board-2p grid cursor-pointer relative">
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={0}
           handleClick={() => handleClick(0)}
@@ -28,6 +29,7 @@ const TwoPlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={1}
           handleClick={() => handleClick(1)}
@@ -35,6 +37,7 @@ const TwoPlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={2}
           handleClick={() => handleClick(2)}
@@ -42,6 +45,7 @@ const TwoPlayers = ({
           classname="bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={3}
           handleClick={() => handleClick(3)}
@@ -49,6 +53,7 @@ const TwoPlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={4}
           handleClick={() => handleClick(4)}
@@ -56,6 +61,7 @@ const TwoPlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={5}
           handleClick={() => handleClick(5)}
@@ -63,6 +69,7 @@ const TwoPlayers = ({
           classname="bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={6}
           handleClick={() => handleClick(6)}
@@ -70,6 +77,7 @@ const TwoPlayers = ({
           classname="right-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={7}
           handleClick={() => handleClick(7)}
@@ -77,6 +85,7 @@ const TwoPlayers = ({
           classname="right-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={8}
           handleClick={() => handleClick(8)}

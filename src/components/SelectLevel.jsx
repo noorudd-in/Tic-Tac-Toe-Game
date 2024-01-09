@@ -15,10 +15,10 @@ const SelectLevel = ({
 
   return (
     <>
-      <div className="mt-[50%]">
+      <div className="mt-[300px]">
         {toggleButton == null && (
           <>
-            <div className="mt-[50%]">
+            <div className="mt-[300px]">
               <h1 className="text-3xl">Tic Tac Toe</h1>
               <h1 className="text-lg mb-2">Choose your level!</h1>
               <div className="flex justify-center items-center">

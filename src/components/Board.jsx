@@ -126,6 +126,21 @@ const Board = ({
             setWinner(playerTwo);
           }
         }
+        return;
+      }
+    }
+
+    // Draw
+    if (level == "2p") {
+      let checkData = data.slice(0, 9);
+      let flag = checkData.every((ele) => ele != null);
+      if (flag) {
+        setWinner("draw");
+      }
+    } else {
+      let flag = data.every((ele) => ele != null);
+      if (flag) {
+        setWinner("draw");
       }
     }
   };
@@ -141,7 +156,6 @@ const Board = ({
           data={data}
           handleClick={handleClick}
           winner={winner}
-          setWinner={setWinner}
         />
       )}
       {level == "3p" && (
@@ -154,7 +168,6 @@ const Board = ({
           data={data}
           handleClick={handleClick}
           winner={winner}
-          setWinner={setWinner}
         />
       )}
       <ResetGame

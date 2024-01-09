@@ -10,6 +10,7 @@ const ThreePlayers = ({
   playerTwo,
   playerThree,
   currentPlayer,
+  winner,
 }) => {
   return (
     <>
@@ -23,6 +24,7 @@ const ThreePlayers = ({
 
       <div className="grid board-3p relative">
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={0}
           handleClick={() => handleClick(0)}
@@ -30,6 +32,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={1}
           handleClick={() => handleClick(1)}
@@ -37,6 +40,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={2}
           handleClick={() => handleClick(2)}
@@ -44,6 +48,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={9}
           handleClick={() => handleClick(9)}
@@ -51,6 +56,7 @@ const ThreePlayers = ({
           classname="bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={3}
           handleClick={() => handleClick(3)}
@@ -58,6 +64,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={4}
           handleClick={() => handleClick(4)}
@@ -65,6 +72,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={5}
           handleClick={() => handleClick(5)}
@@ -72,6 +80,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={10}
           handleClick={() => handleClick(10)}
@@ -79,6 +88,7 @@ const ThreePlayers = ({
           classname="bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={6}
           handleClick={() => handleClick(6)}
@@ -86,6 +96,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={7}
           handleClick={() => handleClick(7)}
@@ -93,6 +104,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={8}
           handleClick={() => handleClick(8)}
@@ -100,6 +112,7 @@ const ThreePlayers = ({
           classname="right-border bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={11}
           handleClick={() => handleClick(11)}
@@ -107,6 +120,7 @@ const ThreePlayers = ({
           classname="bottom-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={12}
           handleClick={() => handleClick(12)}
@@ -114,6 +128,7 @@ const ThreePlayers = ({
           classname="right-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={13}
           handleClick={() => handleClick(13)}
@@ -121,6 +136,7 @@ const ThreePlayers = ({
           classname="right-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={14}
           handleClick={() => handleClick(14)}
@@ -128,6 +144,7 @@ const ThreePlayers = ({
           classname="right-border"
         />
         <Tile
+          winner={winner}
           winnerIndex={winnerIndex}
           index={15}
           handleClick={() => handleClick(15)}
