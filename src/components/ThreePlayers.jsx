@@ -11,13 +11,20 @@ const ThreePlayers = ({
   playerThree,
   currentPlayer,
   winner,
+  scores,
 }) => {
   return (
     <>
       <div className="m-20">
-        <h1 className="text-xl">Player 1: {playerOne}</h1>
-        <h1 className="text-xl">Player 2: {playerTwo}</h1>
-        <h1 className="text-xl mb-2">Player 3: {playerThree}</h1>
+        <h1 className="text-xl">
+          Player 1: {playerOne} ({scores[0]})
+        </h1>
+        <h1 className="text-xl">
+          Player 2: {playerTwo} ({scores[1]})
+        </h1>
+        <h1 className="text-xl mb-2">
+          Player 3: {playerThree} ({scores[2]})
+        </h1>
         <hr />
         <h1>Current Turn: {currentPlayer}</h1>
       </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Tile from "./Tile";
 
@@ -10,12 +10,17 @@ const TwoPlayers = ({
   playerTwo,
   currentPlayer,
   winner,
+  scores,
 }) => {
   return (
     <>
       <div className="m-20">
-        <h1 className="text-xl">Player 1: {playerOne}</h1>
-        <h1 className="text-xl mb-2">Player 2: {playerTwo}</h1>
+        <h1 className="text-xl">
+          Player 1: {playerOne} | {scores[0]}
+        </h1>
+        <h1 className="text-xl mb-2">
+          Player 2: {playerTwo} | {scores[1]}
+        </h1>
         <hr />
         <h1>Current Turn: {currentPlayer}</h1>
       </div>

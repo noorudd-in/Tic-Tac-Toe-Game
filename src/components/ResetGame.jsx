@@ -6,6 +6,7 @@ const ResetGame = ({
   setData,
   currentPlayer,
   setWinnerIndex,
+  setUndoData,
 }) => {
   const handleReset = () => {
     setWinner(null);
@@ -28,6 +29,7 @@ const ResetGame = ({
       null,
     ]);
     setWinnerIndex([null, null, null]);
+    setUndoData(null);
     alert(`Now ${currentPlayer} will play first.`);
   };
   return (

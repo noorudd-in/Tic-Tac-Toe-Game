@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import TwoPlayers from "./TwoPlayers";
 import ThreePlayers from "./ThreePlayers";
 import ResetGame from "./ResetGame";
+import clicksound from "../../assets/click-sound.wav";
+import gameoversound from "../../assets/game-over-sound.wav";
+
+const clickSound = new Audio(clicksound);
+const gameOverSound = new Audio(gameoversound);
+clickSound.volume = 0.5;
+gameOverSound.volume = 0.5;
 
 const Board = ({
   playerOne,
@@ -31,10 +38,19 @@ const Board = ({
   ]);
   const [currentPlayer, setCurrentPlayer] = useState(playerOne);
   const [winnerIndex, setWinnerIndex] = useState([null, null, null]);
+  const [scores, setScores] = useState([0, 0, 0]);
+  const [undoData, setUndoData] = useState(null);
 
   useEffect(() => {
     checkWinner();
+    clickSound.play();
   }, [currentPlayer]);
+
+  useEffect(() => {
+    if (winner != null) {
+      gameOverSound.play();
+    }
+  }, [winner]);
 
   const handleClick = (index) => {
     if (winner != null) {
@@ -44,6 +60,8 @@ const Board = ({
       return;
     }
     let newData = [...data];
+    let oldData = [...data];
+    setUndoData(oldData);
     if (level == "2p") {
       if (currentPlayer == playerOne) {
         newData[index] = "X";
@@ -67,6 +85,26 @@ const Board = ({
         newData[index] = "3";
         setData(newData);
         setCurrentPlayer(playerOne);
+      }
+    }
+  };
+
+  const handleUndo = () => {
+    setData(undoData);
+    setUndoData(null);
+    if (level == "2p") {
+      if (currentPlayer == playerOne) {
+        setCurrentPlayer(playerTwo);
+      } else {
+        setCurrentPlayer(playerOne);
+      }
+    } else {
+      if (currentPlayer == playerOne) {
+        setCurrentPlayer(playerThree);
+      } else if (currentPlayer == playerTwo) {
+        setCurrentPlayer(playerOne);
+      } else {
+        setCurrentPlayer(playerTwo);
       }
     }
   };
@@ -110,20 +148,32 @@ const Board = ({
       const tile2 = data[combi[1]];
       const tile3 = data[combi[2]];
       if (tile1 == tile2 && tile1 == tile3 && tile1 != null) {
+        setUndoData(null);
         setWinnerIndex(combi);
+        let newScores = [...scores];
         if (level == "2p") {
           if (currentPlayer == playerTwo) {
             setWinner(playerOne);
+            newScores[0] += 1;
+            setScores(newScores);
           } else {
             setWinner(playerTwo);
+            newScores[1] += 1;
+            setScores(newScores);
           }
         } else {
           if (currentPlayer == playerOne) {
             setWinner(playerThree);
+            newScores[2] += 1;
+            setScores(newScores);
           } else if (currentPlayer == playerTwo) {
             setWinner(playerOne);
+            newScores[0] += 1;
+            setScores(newScores);
           } else {
             setWinner(playerTwo);
+            newScores[1] += 1;
+            setScores(newScores);
           }
         }
         return;
@@ -156,6 +206,7 @@ const Board = ({
           data={data}
           handleClick={handleClick}
           winner={winner}
+          scores={scores}
         />
       )}
       {level == "3p" && (
@@ -168,7 +219,16 @@ const Board = ({
           data={data}
           handleClick={handleClick}
           winner={winner}
+          scores={scores}
         />
+      )}
+      {undoData != null && winner != "draw" && (
+        <button
+          className="p-2 m-2 bg-orange-500 text-orange-950 text-2xl rounded-lg"
+          onClick={handleUndo}
+        >
+          Undo Once
+        </button>
       )}
       <ResetGame
         winner={winner}
@@ -176,6 +236,7 @@ const Board = ({
         setData={setData}
         currentPlayer={currentPlayer}
         setWinnerIndex={setWinnerIndex}
+        setUndoData={setUndoData}
       />
     </div>
   );
