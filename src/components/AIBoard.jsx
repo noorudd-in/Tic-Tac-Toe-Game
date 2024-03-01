@@ -1,28 +1,25 @@
-import React, { useState } from "react";
-import "../App.css";
+import React from "react";
 import Tile from "./Tile";
 
-const TwoPlayers = ({
-  winnerIndex,
-  data,
-  handleClick,
+const AIBoard = ({
   playerOne,
-  playerTwo,
-  currentPlayer,
+  data,
   winner,
+  handleClick,
+  winnerIndex,
   scores,
+  aiLevel,
 }) => {
   return (
     <>
-      <div className="m-10 block">
-        <h2 className="text-xl">
+      <div className="m-10">
+        <h1 className="text-2xl">
+          Level: {aiLevel.charAt(0).toUpperCase() + aiLevel.slice(1)}
+        </h1>
+        <h2>
           {scores[0]}: {playerOne}
         </h2>
-        <h2 className="text-xl mb-2">
-          {scores[1]}: {playerTwo}
-        </h2>
-        <hr />
-        <h1>Current Turn: {currentPlayer}</h1>
+        <h2>{scores[1]}: Computer</h2>
       </div>
       <div className="board-2p grid cursor-pointer relative">
         <Tile
@@ -101,4 +98,4 @@ const TwoPlayers = ({
   );
 };
 
-export default TwoPlayers;
+export default AIBoard;

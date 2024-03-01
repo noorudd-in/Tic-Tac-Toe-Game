@@ -1,5 +1,6 @@
 import React from "react";
 import Tile from "./Tile";
+import ThreePlayerGuide from "./ThreePlayerGuide";
 import "../App.css";
 
 const ThreePlayers = ({
@@ -15,16 +16,17 @@ const ThreePlayers = ({
 }) => {
   return (
     <>
-      <div className="m-20">
-        <h1 className="text-xl">
-          Player 1: {playerOne} ({scores[0]})
-        </h1>
-        <h1 className="text-xl">
-          Player 2: {playerTwo} ({scores[1]})
-        </h1>
-        <h1 className="text-xl mb-2">
-          Player 3: {playerThree} ({scores[2]})
-        </h1>
+      <div className="m-5">
+        <ThreePlayerGuide />
+        <h2 className="text-xl">
+          {playerOne} : {scores[0]}
+        </h2>
+        <h2 className="text-xl">
+          {playerTwo} : {scores[1]}
+        </h2>
+        <h2 className="text-xl mb-2">
+          {playerThree}: {scores[2]}
+        </h2>
         <hr />
         <h1>Current Turn: {currentPlayer}</h1>
       </div>

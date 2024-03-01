@@ -7,6 +7,9 @@ const ResetGame = ({
   currentPlayer,
   setWinnerIndex,
   setUndoData,
+  level,
+  setCurrentPlayer,
+  playerOne,
 }) => {
   const handleReset = () => {
     setWinner(null);
@@ -30,7 +33,12 @@ const ResetGame = ({
     ]);
     setWinnerIndex([null, null, null]);
     setUndoData(null);
-    alert(`Now ${currentPlayer} will play first.`);
+    if (level != "ai") {
+      alert(`Now ${currentPlayer} will play first.`);
+    }
+    if (level == "ai") {
+      setCurrentPlayer(playerOne);
+    }
   };
   return (
     <>
@@ -51,6 +59,25 @@ const ResetGame = ({
           >
             Change Level
           </button>
+          <footer className="mt-2 mb-10">
+            <h1>
+              <a
+                href="https://linkedin.com/in/nooruddin-shaikh"
+                target="_blank"
+                className="underline underline-offset-4 text-sky-400"
+              >
+                Nooruddin Shaikh
+              </a>{" "}
+              |{" "}
+              <a
+                href="https://github.com/noorudd-in/Tic-Tac-Toe-Game"
+                target="_blank"
+                className="underline underline-offset-4 text-sky-400"
+              >
+                Source Code
+              </a>
+            </h1>
+          </footer>
         </div>
       )}
     </>

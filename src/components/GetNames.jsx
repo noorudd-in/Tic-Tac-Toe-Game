@@ -63,7 +63,18 @@ const GetNames = ({
         >
           Start Game
         </button>
-        <h1 className="text-lg mt-2">Made by Nooruddin Shaikh.</h1>
+
+        <h1 className="text-lg mt-2">
+          Made by{" "}
+          <a
+            href="https://linkedin.com/in/nooruddin-shaikh"
+            target="_blank"
+            className="underline underline-offset-4 text-sky-400"
+          >
+            Nooruddin Shaikh
+          </a>
+          .
+        </h1>
       </div>
     </>
   );

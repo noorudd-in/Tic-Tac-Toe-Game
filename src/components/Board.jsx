@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import TwoPlayers from "./TwoPlayers";
 import ThreePlayers from "./ThreePlayers";
 import ResetGame from "./ResetGame";
+import AIBoard from "./AIBoard";
+import { useEasyAiLogic } from "./computer/useEasyAILogic";
+import { useHardAILogic } from "./computer/useHardAILogic";
+import { useMediumAILogic } from "./computer/useMediumAILogic";
 import clicksound from "../../assets/click-sound.wav";
 import gameoversound from "../../assets/game-over-sound.wav";
 
@@ -17,6 +21,7 @@ const Board = ({
   level,
   winner,
   setWinner,
+  aiLevel,
 }) => {
   const [data, setData] = useState([
     null,
@@ -41,16 +46,43 @@ const Board = ({
   const [scores, setScores] = useState([0, 0, 0]);
   const [undoData, setUndoData] = useState(null);
 
+  // Check for winner or play click sound.
   useEffect(() => {
     checkWinner();
     clickSound.play();
   }, [currentPlayer]);
 
+  // Play sound if game over
   useEffect(() => {
     if (winner != null) {
       gameOverSound.play();
     }
   }, [winner]);
+
+  // Run the logic when playing with AI
+  useEffect(() => {
+    let boardData = [];
+    if (currentPlayer == "Computer") {
+      if (checkWinner()) {
+        setCurrentPlayer("Computer");
+        gameOverSound.play();
+      } else {
+        setCurrentPlayer(playerOne);
+      }
+      if (!checkWinner()) {
+        if (aiLevel == "easy") {
+          boardData = [...data];
+          useEasyAiLogic(boardData, setData);
+        } else if (aiLevel == "hard") {
+          boardData = data.slice(0, 9);
+          useHardAILogic(boardData, setData);
+        } else if (aiLevel == "medium") {
+          boardData = [...data];
+          useMediumAILogic(boardData, setData);
+        }
+      }
+    }
+  }, [data]);
 
   const handleClick = (index) => {
     if (winner != null) {
@@ -72,23 +104,32 @@ const Board = ({
         setData(newData);
         setCurrentPlayer(playerOne);
       }
-    } else {
+    } else if (level == "3p") {
       if (currentPlayer == playerOne) {
-        newData[index] = "1";
+        newData[index] = "X";
         setData(newData);
         setCurrentPlayer(playerTwo);
       } else if (currentPlayer == playerTwo) {
-        newData[index] = "2";
+        newData[index] = "Y";
         setData(newData);
         setCurrentPlayer(playerThree);
       } else {
-        newData[index] = "3";
+        newData[index] = "Z";
         setData(newData);
         setCurrentPlayer(playerOne);
       }
     }
+
+    if (level == "ai") {
+      if (currentPlayer == playerOne) {
+        newData[index] = "X";
+        setData(newData);
+        setCurrentPlayer("Computer");
+      }
+    }
   };
 
+  // Logic for Undo Once
   const handleUndo = () => {
     setData(undoData);
     setUndoData(null);
@@ -98,7 +139,7 @@ const Board = ({
       } else {
         setCurrentPlayer(playerOne);
       }
-    } else {
+    } else if (level == "3p") {
       if (currentPlayer == playerOne) {
         setCurrentPlayer(playerThree);
       } else if (currentPlayer == playerTwo) {
@@ -161,7 +202,7 @@ const Board = ({
             newScores[1] += 1;
             setScores(newScores);
           }
-        } else {
+        } else if (level == "3p") {
           if (currentPlayer == playerOne) {
             setWinner(playerThree);
             newScores[2] += 1;
@@ -175,24 +216,37 @@ const Board = ({
             newScores[1] += 1;
             setScores(newScores);
           }
+        } else if (level == "ai") {
+          if (currentPlayer == playerOne) {
+            setWinner("🤣 Computer");
+            newScores[1] += 1;
+            setScores(newScores);
+          } else {
+            setWinner("😉 " + playerOne);
+            newScores[0] += 1;
+            setScores(newScores);
+          }
         }
-        return;
+        return true;
       }
     }
 
     // Draw
-    if (level == "2p") {
+    if (level == "2p" || level == "ai") {
       let checkData = data.slice(0, 9);
       let flag = checkData.every((ele) => ele != null);
       if (flag) {
         setWinner("draw");
+        return true;
       }
     } else {
       let flag = data.every((ele) => ele != null);
       if (flag) {
         setWinner("draw");
+        return true;
       }
     }
+    return false;
   };
 
   return (
@@ -222,7 +276,19 @@ const Board = ({
           scores={scores}
         />
       )}
-      {undoData != null && winner != "draw" && (
+      {level == "ai" && (
+        <AIBoard
+          playerOne={playerOne}
+          data={data}
+          winner={winner}
+          handleClick={handleClick}
+          winnerIndex={winnerIndex}
+          scores={scores}
+          aiLevel={aiLevel}
+        />
+      )}
+
+      {undoData != null && winner != "draw" && level != "ai" && (
         <button
           className="p-2 m-2 bg-orange-500 text-orange-950 text-2xl rounded-lg"
           onClick={handleUndo}
@@ -237,6 +303,9 @@ const Board = ({
         currentPlayer={currentPlayer}
         setWinnerIndex={setWinnerIndex}
         setUndoData={setUndoData}
+        level={level}
+        setCurrentPlayer={setCurrentPlayer}
+        playerOne={playerOne}
       />
     </div>
   );
