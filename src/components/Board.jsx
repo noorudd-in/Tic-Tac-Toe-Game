@@ -3,6 +3,7 @@ import TwoPlayers from "./TwoPlayers";
 import ThreePlayers from "./ThreePlayers";
 import ResetGame from "./ResetGame";
 import AIBoard from "./AIBoard";
+import OnlineBoard from "./online/OnlineBoard";
 import { useEasyAiLogic } from "./computer/useEasyAILogic";
 import { useHardAILogic } from "./computer/useHardAILogic";
 import { useMediumAILogic } from "./computer/useMediumAILogic";
@@ -22,6 +23,9 @@ const Board = ({
   winner,
   setWinner,
   aiLevel,
+  setPlayerOne,
+  setPlayerTwo,
+  onlinePlayerID,
 }) => {
   const [data, setData] = useState([
     null,
@@ -285,6 +289,19 @@ const Board = ({
           winnerIndex={winnerIndex}
           scores={scores}
           aiLevel={aiLevel}
+        />
+      )}
+
+      {level == "online" && (
+        <OnlineBoard
+          setPlayerOne={setPlayerOne}
+          setPlayerTwo={setPlayerTwo}
+          playerOne={playerOne}
+          playerTwo={playerTwo}
+          winner={winner}
+          winnerIndex={winnerIndex}
+          scores={scores}
+          onlinePlayerID={onlinePlayerID}
         />
       )}
 

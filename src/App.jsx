@@ -10,8 +10,7 @@ function App() {
   const [level, setLevel] = useState(null);
   const [winner, setWinner] = useState(null);
   const [aiLevel, setAiLevel] = useState(null);
-
-  console.log(axios.get("https://api.noorudd.in/games/1"));
+  const [onlinePlayerID, setOnlinePlayerID] = useState("");
   return (
     <>
       {level == null ? (
@@ -24,6 +23,8 @@ function App() {
           playerTwo={playerTwo}
           playerThree={playerThree}
           setAiLevel={setAiLevel}
+          onlinePlayerID={onlinePlayerID}
+          setOnlinePlayerID={setOnlinePlayerID}
         />
       ) : (
         <Board
@@ -34,6 +35,9 @@ function App() {
           winner={winner}
           setWinner={setWinner}
           aiLevel={aiLevel}
+          setPlayerOne={setPlayerOne}
+          setPlayerTwo={setPlayerTwo}
+          onlinePlayerID={onlinePlayerID}
         />
       )}
     </>

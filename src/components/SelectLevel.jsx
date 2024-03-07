@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import GetNames from "./GetNames";
 import GetNameForAI from "./computer/GetNameForAI";
+import OnlinePlayers from "./online/OnlinePlayers";
 
 const SelectLevel = ({
   setLevel,
@@ -12,6 +13,8 @@ const SelectLevel = ({
   playerTwo,
   playerThree,
   setAiLevel,
+  onlinePlayerID,
+  setOnlinePlayerID,
 }) => {
   const [toggleButton, setToggleButton] = useState(null);
 
@@ -49,6 +52,15 @@ const SelectLevel = ({
                   Play with Computer
                 </button>
               </div>
+              <h1>OR</h1>
+              <div className="flex justify-center items-center">
+                <button
+                  className="p-2 m-2 bg-orange-500 text-orange-950 text-2xl rounded-lg"
+                  onClick={() => setToggleButton("online")}
+                >
+                  Play Online
+                </button>
+              </div>
               <h1 className="text-lg mt-2">
                 Made by{" "}
                 <a
@@ -84,6 +96,19 @@ const SelectLevel = ({
           setPlayerOne={setPlayerOne}
           setLevel={setLevel}
           setAiLevel={setAiLevel}
+        />
+      )}
+
+      {toggleButton == "online" && (
+        <OnlinePlayers
+          toggleButton={toggleButton}
+          setLevel={setLevel}
+          setPlayerOne={setPlayerOne}
+          setPlayerTwo={setPlayerTwo}
+          playerOne={playerOne}
+          playerTwo={playerTwo}
+          onlinePlayerID={onlinePlayerID}
+          setOnlinePlayerID={setOnlinePlayerID}
         />
       )}
     </>
